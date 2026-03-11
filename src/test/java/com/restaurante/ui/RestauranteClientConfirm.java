@@ -1,23 +1,30 @@
 package com.restaurante.ui;
 
 import net.serenitybdd.core.pages.PageObject;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import net.serenitybdd.core.pages.WebElementFacade;
+import net.serenitybdd.core.annotations.findby.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import java.time.Duration;
 
 public class RestauranteClientConfirm extends PageObject {
 
-    @FindBy(xpath = "//main[.//h1[text()='Pedido confirmado']]")
-    private WebElement mensajeConfirmacion;
+    @FindBy(xpath = "//h1[contains(.,'Pedido confirmado')]")
+    private WebElementFacade mensajeConfirmacion;
 
-    @FindBy(xpath = "//div[.//p[text()='ID completo del pedido']]/p[2]")
-    private WebElement idPedido;
+    @FindBy(xpath = "//p[contains(text(),'ID completo del pedido')]/following-sibling::p")
+    private WebElementFacade idPedido;
 
     public void verificarPedidoGenerado() {
-        mensajeConfirmacion.isDisplayed();
+        setImplicitTimeout(20, java.time.temporal.ChronoUnit.SECONDS);
+        mensajeConfirmacion.withTimeoutOf(Duration.ofSeconds(20)).waitUntilVisible();
     }
 
     public void visualizarMensajeConfirmacion() {
-        mensajeConfirmacion.isDisplayed();
-        idPedido.isDisplayed();
+        mensajeConfirmacion.waitUntilVisible();
+        idPedido.waitUntilVisible();
+    }
+
+    public void waitForPresenceOf(String cssSelector) {
+        waitFor(ExpectedConditions.presenceOfElementLocated(org.openqa.selenium.By.cssSelector(cssSelector)));
     }
 }

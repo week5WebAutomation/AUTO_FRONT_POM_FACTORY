@@ -1,19 +1,21 @@
 package com.restaurante.runners;
+
 import org.junit.platform.suite.api.ConfigurationParameter;
-import org.junit.platform.suite.api.IncludeEngine;
+import org.junit.platform.suite.api.ConfigurationParameters;
+import org.junit.platform.suite.api.IncludeEngines;
 import org.junit.platform.suite.api.SelectClasspathResource;
 import org.junit.platform.suite.api.Suite;
 
-
+import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
 
 @Suite
-@IncludeEngine("cucumber")
-@SelectClasspathResource("/features/usuario_interacciones.feature")
-@ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "io.cucumber.core.plugin.SerenityReportsParallel,pretty,timeline:build/test-results/timeline")
-
-
+@IncludeEngines("cucumber")
+@SelectClasspathResource("features/registro.feature")
+@ConfigurationParameters({
+    @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "com.restaurante"),
+    @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "net.serenitybdd.cucumber.core.plugin.SerenityReporterParallel, pretty")
+})
 public class TestRunnerUsuarioInteracciones {
-   
 }
 
