@@ -31,7 +31,7 @@ POM Utilizando la anotación de @FindBy de Page Factory
 
 ## Estructura de carpetas
 
-Crea el arquetipo de automatizadas utilizando el patrón POM implementando la anotación de @FindBy de Page Factory
+Crea el arquetipo de automatizadas utilizando el patrón POM implementando  la anotación de @FindBy de Page Factory
 
 La estructura de carpetas es la siguiente
 src/test
