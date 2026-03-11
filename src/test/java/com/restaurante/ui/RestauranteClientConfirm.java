@@ -6,10 +6,10 @@ import org.openqa.selenium.support.FindBy;
 
 public class RestauranteClientConfirm extends PageObject {
 
-    @FindBy(css = ".mensaje-confirmacion")
+    @FindBy(xpath = "//main[.//h1[text()='Pedido confirmado']]")
     private WebElement mensajeConfirmacion;
 
-    @FindBy(css = ".order-id")
+    @FindBy(xpath = "//div[.//p[text()='ID completo del pedido']]/p[2]")
     private WebElement idPedido;
 
     public void verificarPedidoGenerado() {

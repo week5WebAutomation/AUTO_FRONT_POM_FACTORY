@@ -6,10 +6,10 @@ import org.openqa.selenium.support.FindBy;
 
 public class RestauranteClientTable extends PageObject {
 
-    @FindBy(css = ".table-card[data-status='disponible']")
+    @FindBy(xpath = "//button[.//span[contains(text(),'Vacia')]]")
     private WebElement mesaDisponible;
 
-    @FindBy(css = ".table-card")
+    @FindBy(xpath = "//button[.//span[contains(text(),'Ocupada')]]")
     private WebElement mesaSeleccionada;
 
     public void abrirPaginaMesas() {
@@ -17,6 +17,8 @@ public class RestauranteClientTable extends PageObject {
     }
 
     public void seleccionarMesaConEstado(String estado) {
-        mesaDisponible.click();
+        String xpathDinamico = String.format("//button[.//span[contains(text(),'%s')]]", estado);
+        WebElement mesa = getDriver().findElementByXPath(xpathDinamico);
+        mesa.click();
     }
 }
