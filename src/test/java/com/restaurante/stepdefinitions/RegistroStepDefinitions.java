@@ -1,3 +1,9 @@
+package com.restaurante.stepdefinitions;
+
+import com.restaurante.ui.RestauranteClientTable;
+import com.restaurante.ui.RestauranteClientMenu;
+import com.restaurante.ui.RestaduranteClientCart;
+import com.restaurante.ui.RestauranteClientConfirm;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
@@ -5,53 +11,58 @@ import io.cucumber.java.en.And;
 
 public class RegistroStepDefinitions {
 
-    @Given("el usuario accede a la pagina de mesas")
+    RestauranteClientTable tablePage;
+    RestauranteClientMenu menuPage;
+    RestaduranteClientCart cartPage;
+    RestauranteClientConfirm confirmPage;
+
+    @Given("el usuario accede a la pagina de mesas disponibles")
     public void accederAPaginaMesas() {
-        // Implementación del acceso a la página de mesas
+        tablePage.abrirPaginaMesas();
     }
 
-    @And("selecciona una mesa con estado disponible {string}")
+    @And("selecciona una mesa con estado {string}")
     public void seleccionarMesaDisponible(String estado) {
-        // Implementación de la selección de una mesa con el estado especificado
+        tablePage.seleccionarMesaConEstado(estado);
     }
 
     @When("el usuario es redirigido a la pagina del menu")
     public void redirigirAPaginaMenu() {
-        // Implementación de la redirección a la página del menú
+        menuPage.waitForPresenceOf(".menu-container");
     }
 
     @And("agrega productos al carrito seleccionando la cantidad deseada para cada uno")
     public void agregarProductosAlCarrito() {
-        // Implementación de agregar productos al carrito
+        menuPage.agregarProductosAlCarrito();
     }
 
     @And("revisa el carrito de compras y elimina los productos no deseados")
     public void revisarYEliminarProductos() {
-        // Implementación de la revisión y eliminación de productos del carrito
+        cartPage.eliminarProductosNoDeseados();
     }
 
     @And("añade notas adicionales a los productos que lo requieran")
     public void agregarNotasAdicionales() {
-        // Implementación de añadir notas adicionales a los productos
+        cartPage.agregarNotasAdicionales();
     }
 
     @And("confirma el pedido desde la pagina del carrito")
     public void confirmarPedido() {
-        // Implementación de la confirmación del pedido
+        cartPage.confirmarPedido();
     }
 
     @Then("el pedido es generado y enviado correctamente")
     public void verificarPedidoGenerado() {
-        // Implementación de la generación y envío del pedido
+        confirmPage.verificarPedidoGenerado();
     }
 
     @And("el usuario es redirigido a la pagina de confirmacion del pedido")
     public void redirigirAPaginaConfirmacion() {
-        // Implementación de la redirección a la página de confirmación del pedido
+        confirmPage.waitForPresenceOf(".confirmation-container");
     }
 
     @And("el usuario visualiza el mensaje de confirmacion junto con el ID del pedido")
     public void visualizarMensajeConfirmacion() {
-        // Implementación de la visualización del mensaje de confirmación y el ID del pedido
+        confirmPage.visualizarMensajeConfirmacion();
     }
 }
