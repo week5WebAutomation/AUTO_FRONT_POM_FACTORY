@@ -1,10 +1,7 @@
-import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.Task;
-import net.serenitybdd.screenplay.actions.Click;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class VerConfirmacionPedido implements Task {
+public class VerConfirmacionPedido {
 
     @FindBy(id = "confirmacion-pedido")
     private WebElement confirmacionPedido;
@@ -24,8 +21,7 @@ public class VerConfirmacionPedido implements Task {
         this.idPedido = idPedido;
     }
 
-    @Override
-    public <T extends Actor> void performAs(T actor) {
+    public void verificarConfirmacion() {
         if (!mensajeConfirmacion.isDisplayed()) {
             throw new AssertionError("El mensaje de confirmación no está visible.");
         }
@@ -40,9 +36,5 @@ public class VerConfirmacionPedido implements Task {
 
     private void enviarPedidoACocina(String idPedido) {
         System.out.println("Pedido enviado a la cocina con ID: " + idPedido);
-    }
-
-    public static VerConfirmacionPedido verConfirmacionPedido(String idPedido) {
-        return new VerConfirmacionPedido(idPedido);
     }
 }

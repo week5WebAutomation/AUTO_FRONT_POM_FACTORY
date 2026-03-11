@@ -1,15 +1,9 @@
 package com.restaurante.tasks;
 
-import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.Task;
-import net.serenitybdd.screenplay.actions.Click;
-import net.serenitybdd.screenplay.targets.Target;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static com.restaurante.utils.Constants.*;
-
-public class ConfirmarPedido implements Task {
+public class ConfirmarPedido {
 
     @FindBy(xpath = "//button[contains(text(), 'Confirmar pedido')]")
     private WebElement botonConfirmarPedido;
@@ -37,8 +31,7 @@ public class ConfirmarPedido implements Task {
         this.notas = notas;
     }
 
-    @Override
-    public <T extends Actor> void performAs(T actor) {
+    public void confirmar() {
         productosCarrito.click();
 
         botonRemoverProducto.click();
@@ -49,11 +42,6 @@ public class ConfirmarPedido implements Task {
 
         if (notas != null && !notas.isEmpty()) {
             System.out.println("Notas adicionales: " + notas);
-            // Aquí puedes agregar la lógica para interactuar con el campo de notas si es necesario
         }
-    }
-
-    public static ConfirmarPedido confirmarPedido(String nombreProducto, String descripcion, String precio, String cantidadElegida, String notas) {
-        return new ConfirmarPedido(nombreProducto, descripcion, precio, cantidadElegida, notas);
     }
 }

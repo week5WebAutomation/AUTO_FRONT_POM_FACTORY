@@ -1,15 +1,9 @@
 package com.restaurante.tasks;
 
-import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.Task;
-import net.serenitybdd.screenplay.actions.Click;
-import net.serenitybdd.screenplay.actions.Enter;
-import net.serenitybdd.screenplay.actions.SendKeys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import com.restaurante.ui.RestauranteClientMenu;
 
-public class EscogerProductosMenu implements Task {
+public class EscogerProductosMenu {
 
     private final String nombreProducto;
     private final int cantidad;
@@ -23,33 +17,26 @@ public class EscogerProductosMenu implements Task {
     @FindBy(xpath = "//div[contains(text(), 'productos')]")
     private WebElement totalCarrito;
 
+    @FindBy(xpath = "//input[@id='search-field']")
+    private WebElement campoBusqueda;
+
+    @FindBy(xpath = "//button[@id='search-button']")
+    private WebElement botonBuscar;
+
+    @FindBy(xpath = "//input[@id='quantity-field']")
+    private WebElement campoCantidad;
+
     public EscogerProductosMenu(String nombreProducto, int cantidad) {
         this.nombreProducto = nombreProducto;
         this.cantidad = cantidad;
     }
 
-    @Override
-    public <T extends Actor> void performAs(T actor) {
-        actor.attemptsTo(
-            // Navegar a la página del menú
-            Click.on(RestauranteClientMenu.MENU_PAGE),
-
-            // Seleccionar el producto por nombre
-            Enter.theValue(nombreProducto).into(RestauranteClientMenu.SEARCH_FIELD),
-            Click.on(RestauranteClientMenu.SEARCH_BUTTON),
-
-            // Modificar la cantidad deseada
-            SendKeys.of(String.valueOf(cantidad)).into(RestauranteClientMenu.QUANTITY_FIELD),
-
-            // Agregar el producto al carrito
-            Click.on(RestauranteClientMenu.ADD_TO_CART_BUTTON),
-
-            // Verificar el carrito de compras
-            Click.on(RestauranteClientMenu.CART_BUTTON)
-        );
-    }
-
-    public static EscogerProductosMenu agregarProducto(String nombreProducto, int cantidad) {
-        return new EscogerProductosMenu(nombreProducto, cantidad);
+    public void agregarProducto() {
+        menuProductos.click();
+        campoBusqueda.sendKeys(nombreProducto);
+        botonBuscar.click();
+        campoCantidad.sendKeys(String.valueOf(cantidad));
+        botonAgregarAlCarrito.click();
+        totalCarrito.click();
     }
 }
