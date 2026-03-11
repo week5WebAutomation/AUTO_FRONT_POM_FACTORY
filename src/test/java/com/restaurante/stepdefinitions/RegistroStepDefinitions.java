@@ -1,7 +1,9 @@
 package com.restaurante.stepdefinitions;
 
 import com.restaurante.ui.RestauranteClientTable;
+import com.restaurante.util.Constantes;
 import com.restaurante.ui.RestauranteClientMenu;
+import com.restaurante.hooks.AbrirNavegador;
 import com.restaurante.ui.RestaduranteClientCart;
 import com.restaurante.ui.RestauranteClientConfirm;
 import io.cucumber.java.en.Given;
@@ -17,7 +19,13 @@ public class RegistroStepDefinitions {
     RestaduranteClientCart cartPage;
     RestauranteClientConfirm confirmPage;
 
-    @Given("el usuario accede a la pagina de mesas disponibles")
+    @Given("el usuario esta en la pagina de registro")
+    public void elUsuarioEstaEnLaPaginaDeRegistro() {
+        AbrirNavegador navegador = new AbrirNavegador(Constantes.URL);
+        navegador.abrir();
+    }
+
+    @When("el usuario accede a la pagina de mesas disponibles")
     public void accederAPaginaMesas() {
         tablePage.abrirPaginaMesas();
     }
