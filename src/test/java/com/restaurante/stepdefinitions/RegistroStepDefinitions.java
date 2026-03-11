@@ -8,6 +8,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.And;
+import java.util.List;
 
 public class RegistroStepDefinitions {
 
@@ -33,17 +34,17 @@ public class RegistroStepDefinitions {
 
     @And("agrega productos al carrito seleccionando la cantidad deseada para cada uno")
     public void agregarProductosAlCarrito() {
-        menuPage.agregarProductosAlCarrito();
+        menuPage.agregarProductosAlCarrito(List.of(0, 1), List.of(2, 3)); // Example indices and quantities
     }
 
     @And("revisa el carrito de compras y elimina los productos no deseados")
     public void revisarYEliminarProductos() {
-        cartPage.eliminarProductosNoDeseados();
+        cartPage.eliminarProductosNoDeseados(List.of(0, 1)); // Example indices of unwanted products
     }
 
     @And("añade notas adicionales a los productos que lo requieran")
     public void agregarNotasAdicionales() {
-        cartPage.agregarNotasAdicionales();
+        cartPage.agregarNotasAdicionales(List.of(0, 1), List.of("Nota 1", "Nota 2")); // Example indices and notes
     }
 
     @And("confirma el pedido desde la pagina del carrito")

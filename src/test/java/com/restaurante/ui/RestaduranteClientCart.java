@@ -35,6 +35,12 @@ public class RestaduranteClientCart extends PageObject {
         botonEliminar.click();
     }
 
+    public void eliminarProductosNoDeseados(List<Integer> indicesProductos) {
+        for (int indice : indicesProductos) {
+            eliminarProductoDelCarrito(indice);
+        }
+    }
+
     public String obtenerNombreProducto(int indiceProducto) {
         WebElement producto = productosEnCarrito.get(indiceProducto);
         return producto.findElement(By.cssSelector(".nombre-producto")).getText();
@@ -51,5 +57,15 @@ public class RestaduranteClientCart extends PageObject {
 
     public void confirmarPedido() {
         btnConfirmarPedido.click();
+    }
+
+    public void agregarNotasAdicionales(List<Integer> indicesProductos, List<String> notas) {
+        for (int i = 0; i < indicesProductos.size(); i++) {
+            WebElement producto = productosEnCarrito.get(indicesProductos.get(i));
+            WebElement campoNotas = producto.findElement(By.cssSelector(".input-notas"));
+
+            campoNotas.clear();
+            campoNotas.sendKeys(notas.get(i));
+        }
     }
 }

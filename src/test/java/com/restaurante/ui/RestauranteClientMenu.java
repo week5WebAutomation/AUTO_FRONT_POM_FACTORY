@@ -1,45 +1,43 @@
 package com.restaurante.ui;
 
-import net.serenitybdd.core.pages.PageObject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import java.util.List;
-import net.serenitybdd.screenplay.targets.Target;
 
-public class RestauranteClientMenu extends PageObject {
+public class RestauranteClientMenu {
 
-    public static final Target MENU_PAGE = Target.the("Menu page")
-        .locatedBy("//div[@id='menu-page']");
+    @FindBy(id = "menu-page")
+    private WebElement menuPage;
 
-    public static final Target PRODUCT_NAME_FIELD = Target.the("Product name field")
-        .locatedBy("//input[@id='product-name']");
+    @FindBy(id = "product-name")
+    private WebElement productNameField;
 
-    public static final Target PRODUCT_DESCRIPTION_FIELD = Target.the("Product description field")
-        .locatedBy("//textarea[@id='product-description']");
+    @FindBy(id = "product-description")
+    private WebElement productDescriptionField;
 
-    public static final Target PRODUCT_PRICE_FIELD = Target.the("Product price field")
-        .locatedBy("//input[@id='product-price']");
+    @FindBy(id = "product-price")
+    private WebElement productPriceField;
 
-    public static final Target PRODUCT_QUANTITY_FIELD = Target.the("Product quantity field")
-        .locatedBy("//input[@id='product-quantity']");
+    @FindBy(id = "product-quantity")
+    private WebElement productQuantityField;
 
-    public static final Target QUANTITY_FIELD = Target.the("Quantity field")
-        .locatedBy("//input[@id='quantity-field']");
+    @FindBy(id = "quantity-field")
+    private WebElement quantityField;
 
-    public static final Target ADD_TO_CART_BUTTON = Target.the("Add to cart button")
-        .locatedBy("//button[@id='add-to-cart']");
+    @FindBy(id = "add-to-cart")
+    private WebElement addToCartButton;
 
-    public static final Target BOTON_CARRITO_COMPRAS = Target.the("Boton Carrito Compras")
-        .locatedBy("//button[.//span[text()='Comprar']]");
+    @FindBy(xpath = "//button[.//span[text()='Comprar']]")
+    private WebElement botonCarritoCompras;
 
-    public static final Target SEARCH_FIELD = Target.the("Search field")
-        .locatedBy("//input[@id='search-field']");
+    @FindBy(id = "search-field")
+    private WebElement searchField;
 
-    public static final Target SEARCH_BUTTON = Target.the("Search button")
-        .locatedBy("//button[@id='search-button']");
+    @FindBy(id = "search-button")
+    private WebElement searchButton;
 
-    public static final Target CART_BUTTON = Target.the("Cart button")
-        .locatedBy("//button[@id='cart-button']");
+    @FindBy(id = "cart-button")
+    private WebElement cartButton;
 
     @FindBy(xpath = "//div[.//button[contains(text(),'Agregar')]]")
     private List<WebElement> productos;
@@ -61,6 +59,10 @@ public class RestauranteClientMenu extends PageObject {
         for (int i = 0; i < indices.size(); i++) {
             agregarProductoAlCarrito(indices.get(i), cantidades.get(i));
         }
+    }
+
+    public void agregarProductosAlCarrito(List<Integer> indices, List<Integer> cantidades) {
+        agregarVariosProductosAlCarrito(indices, cantidades);
     }
 
     public void verCarritoDeCompras() {
