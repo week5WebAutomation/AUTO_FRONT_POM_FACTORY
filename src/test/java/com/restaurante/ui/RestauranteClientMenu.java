@@ -1,54 +1,29 @@
 package com.restaurante.ui;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
+import java.time.Duration;
+import net.serenitybdd.core.pages.PageObject;
 
-public class RestauranteClientMenu {
+public class RestauranteClientMenu extends PageObject {
 
-    @FindBy(id = "menu-page")
-    private WebElement menuPage;
-
-    @FindBy(id = "product-name")
-    private WebElement productNameField;
-
-    @FindBy(id = "product-description")
-    private WebElement productDescriptionField;
-
-    @FindBy(id = "product-price")
-    private WebElement productPriceField;
-
-    @FindBy(id = "product-quantity")
-    private WebElement productQuantityField;
-
-    @FindBy(id = "quantity-field")
-    private WebElement quantityField;
-
-    @FindBy(id = "add-to-cart")
-    private WebElement addToCartButton;
+    @FindBy(xpath = "//div[contains(@class, 'flex') and contains(@class, 'gap-1')]//span")
+    private WebElement campoCantidad;
 
     @FindBy(xpath = "//button[.//span[text()='Comprar']]")
     private WebElement botonCarritoCompras;
 
-    @FindBy(id = "search-field")
-    private WebElement searchField;
-
-    @FindBy(id = "search-button")
-    private WebElement searchButton;
-
-    @FindBy(id = "cart-button")
-    private WebElement cartButton;
-
     @FindBy(xpath = "//div[.//button[contains(text(),'Agregar')]]")
     private List<WebElement> productos;
 
-    @FindBy(xpath = "//button[.//span[contains(text(),'Comprar')]]")
-    private WebElement btnVerCarrito;
-
     public void agregarProductoAlCarrito(int indiceProducto, int cantidad) {
         WebElement producto = productos.get(indiceProducto);
-        WebElement campoCantidad = producto.findElement(By.cssSelector(".input-cantidad"));
-        WebElement botonAgregar = producto.findElement(By.cssSelector(".btn-agregar-producto"));
+        WebElement botonAgregar = producto.findElement(By.xpath(".//button[contains(text(),'Agregar')]"));
 
         campoCantidad.clear();
         campoCantidad.sendKeys(String.valueOf(cantidad));
@@ -66,6 +41,12 @@ public class RestauranteClientMenu {
     }
 
     public void verCarritoDeCompras() {
-        btnVerCarrito.click();
+        botonCarritoCompras.click();
+    }
+
+    public void waitForPresenceOf(String cssSelector) {
+        WebDriver driver = getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(cssSelector)));
     }
 }

@@ -42,7 +42,6 @@ src/test
 ├── questions    → crear .gitkeep
 ├── runners      → crear .gitkeep
 ├── stepdefinitions → crear .gitkeep
-├── tasks        → crear .gitkeep
 ├── ui           → crear .gitkeep ← Page Objects aquí
 └── util         → crear .gitkeep
 └── resources
