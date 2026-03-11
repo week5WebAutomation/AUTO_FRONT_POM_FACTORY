@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Screenshots</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff"><link rel="stylesheet" href="bootstrap-icons/bootstrap-icons.css">
+<!-- JQuery -->
+<script type="text/javascript" src="scripts/jquery-3.7.1.min.js"></script><!-- Required Stylesheets -->
+<link href="bootstrap-treeview/dist/bootstrap-treeview.min.css" rel="stylesheet">
+
+<!-- Required Javascript -->
+<script src="bootstrap-treeview/dist/bootstrap-treeview.min.js"></script><!-- DataTables -->
+<link type="text/css" href="datatables/2.3.1/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/2.3.1/datatables.min.js"></script>
+<script type="text/javascript" src="datatables/2.3.1/time-elapsed-dhms.js"></script>
+
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+
+<script>
+    jQuery.fn.dataTable.ext.type.order['time-elapsed-dhms-pre'] = function(data) {
+
+        var matches = data.match(/^(\d+(?:\.\d+)?)\s*([a-z]+)/i);
+        var multipliers = {
+            ms: 1,
+            s: 1000,
+            m: 60000,
+            h: 3600000,
+            d: 86400000
+        };
+
+        if (matches) {
+            var multiplier = multipliers[matches[2].toLowerCase()];
+            return parseFloat(matches[1]) * multiplier;
+        } else {
+            return -1;
+        };
+    };
+</script>
+<link rel="stylesheet" href="css/core.css"/>
+<link rel="stylesheet" href="css/link.css"/>
+<link type="text/css" media="screen" href="css/screen.css" rel="Stylesheet"/>
+<!--CHART.JS-->
+<script src="chartjs/chart.js"></script>
+<script src="chartjs/chartjs-plugin-datalabels@2.0.0.min.js"></script>
+<script src="chartjs/patternomaly.min.js"></script>
+<script>
+    // Register the plugin to all charts:
+    Chart.register(ChartDataLabels);
+</script>
+
+    <!-- Swiper.js local styles and script -->
+    <link rel="stylesheet" href="swiper/swiper-bundle.min.css" />
+    <script src="swiper/swiper-bundle.min.js"></script>
+
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const startIndex = parseInt(urlParams.get("screenshot")) || 0;
+
+            new Swiper('.swiper', {
+                initialSlide: startIndex,
+                effect: 'fade',
+                speed: 200,
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                    renderBullet: function (index, className) {
+                        return '<span class="' + className + '">' + (index + 1) + "</span>";
+                    },
+                    dynamicBullets: true,
+                    dynamicMainBullets: 3  // Shows 3 main bullets + 2 smaller ones on sides
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev'
+                },
+                keyboard: {
+                    enabled: true,
+                    onlyInViewport: true
+                }
+            });
+        });
+    </script>
+
+    <style>
+        .swiper {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        .swiper-slide img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .swiper-pagination-bullet {
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+            font-size: 12px;
+            color: #000;
+            opacity: 1;
+            background: lightgrey;
+        }
+
+        .swiper-pagination-bullet-active {
+            color: #fff;
+            background: #007aff;
+        }
+    </style>
+</head>
+
+<body>
+<div id="topheader">
+    <div id="topbanner">
+        <div id="logo"><a href="index.html"><img src="images/serenity-logo.png" border="0"/></a></div>
+        <div id="projectname-banner" style="float:right">
+            <span class="projectname">
+                <span class="projecttitle">AUTO_FRONT_POM_FACTORY</span>
+                <span class="projectsubtitle"></span>
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="middlecontent">
+    <div id="contenttop">
+        <div class="middlebg">
+            <span class="breadcrumbs">
+                <a href="index.html">Home</a>
+                > <span class="truncate-40"><a
+                    href="0582fd0600891435623979e560bfd1b6a0f7596ba510c185779092e3dc76027c.html">Registro</a></span>
+                > <span class="truncate-60"><a
+                    href="64c69ecd0796d98af1dfb92d9b03e2d632c972df379d13c77932ce10e5eee107.html">Realizar un pedido completo en el restaurante </a></span>
+                > Screenshots
+            </span>
+        </div>
+        <div class="rightbg"></div>
+    </div>
+
+    <div class="clr"></div>
+
+    <!--/* starts second table*/-->
+<div>
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#"><i class="bi bi-journal-check"></i> Overall Test Results</a>
+        </li>
+        <li >
+            <a href="capabilities.html"><i class="bi bi-journal-text"></i> Requirements</a>
+        </li>
+        <li >
+            <a href="576946480b52ad056d6f5bddf874399c83582ecf90963cc074a14c70580e7d9f.html"><i class="bi bi-chat-text"></i> Features</a>
+        </li>
+    </ul>
+    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 11-03-2026 16:25</span>
+    <br style="clear:left"/>
+</div>
+
+    <div class="clr"></div>
+
+
+    <div id="contentbody">
+        <div class="titlebar">
+            <div class="story-title">
+                <table class="outcome-header">
+                    <tr>
+                        <td>
+                            <div>
+                                <h3 class="discreet-story-header">
+                                    <i class="fs-2 bi bi-chat-left-quote large-icon"></i>
+                                    <span class="story-header-title">Flujo Completo De Pedido En Restaurante </span>
+                                    <span class="badge tag-badge" style="">Feature</span>
+                                </h3>
+
+                                <div class="discreet-requirement-narrative-title">
+                                Como usuario, quiero realizar un pedido completo en el restaurante, desde la seleccion de una mesa hasta la confirmacion del pedido, para disfrutar de una experiencia fluida y satisfactoria.
+                                </div>
+                            </div>
+
+                        </td>
+                        <td valign="top" align="right">
+                            <p class="tag">
+                                <span class="badge tag-badge" style="background:default;"
+                                    <i class="bi bi-tag-fill"></i>&nbsp;<a class="tagLink" style="background:default;" href="34658a1663fcf042bd7acb3325affbe4e647c8acd84d0228be2f52e1381e61b9.html">10 To 30 Seconds
+                                        (Duration)
+                                </a>
+                                </span>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="story-title">
+                <table class="outcome-header">
+                    <tr>
+                        <td colspan="2" class="test-title-bar">
+                            <span class="outcome-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon fa-2x' title='SUCCESS'></i></a></span>
+                            <span class="test-case-title">
+                                <span class="success-color">Realizar un pedido completo en el restaurante
+                                    <span class="related-issue-title"></span>
+                                </span>
+                            </span>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="clr"></div>
+
+    <div class="story-title">
+        <h3>Scenario:</h3>
+        <div class="scenario">Given el usuario accede a la pagina de mesas disponibles<br>And selecciona una mesa con estado "disponible"<br>When el usuario es redirigido a la pagina del menu<br>And agrega productos al carrito seleccionando la cantidad deseada para cada uno<br>And revisa el carrito de compras y elimina los productos no deseados<br>And agrega notas adicionales a los productos que lo requieran<br>And confirma el pedido desde la pagina del carrito<br>Then el pedido es generado y enviado correctamente<br>And el usuario es redirigido a la pagina de confirmacion del pedido<br>And el usuario visualiza el mensaje de confirmacion junto con el ID del pedido</div>
+    </div>
+
+    <div id="beforetable"></div>
+    <div id="contenttilttle">
+    <!-- Swiper Carousel -->
+    <div class="swiper">
+        <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="82d27b366c78409f41ae4bf4c38ac6a915c6541fadfdc40fbe1d3aeef2fd7233.png" title=" 1: Realizar un pedido completo en el restaurante ({order_id=1, table_id=11, status**=READY, product_1=Hamburguesa, quantity_1=2, product_2=Papas fritas, quantity_2=1, product_3=Refresco, quantity_3=2, total_price=1130, confirmed_at=2026-03-10 12:30:00})" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="82d27b366c78409f41ae4bf4c38ac6a915c6541fadfdc40fbe1d3aeef2fd7233.png" title=" Given el usuario accede a la pagina de mesas disponibles" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="9cd8abee3517c3483553d82de9d1ba7f24a1a657959c185ac49a179459e5b6fe.png" title=" And selecciona una mesa con estado &quot;disponible&quot;" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="57327e737a20bb31c050b1599a61900bec1300ae031f31842a7271ebd921ab1c.png" title=" When el usuario es redirigido a la pagina del menu" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="1942a18bccf1c754ae32cd75bafbe666a8d7811febd8970262e34163933dd42c.png" title=" And agrega productos al carrito seleccionando la cantidad deseada para cada uno" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="1942a18bccf1c754ae32cd75bafbe666a8d7811febd8970262e34163933dd42c.png" title=" And revisa el carrito de compras y elimina los productos no deseados" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="30fb8808c66591268b6a016b10b94d9cea14c0c5767b0cd90a7137e805ec86e9.png" title=" And agrega notas adicionales a los productos que lo requieran" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="e720738283a3361c7cf8537fb7c4d8c10238c2e7c3e9af82bb0547562fe32a0f.png" title=" And confirma el pedido desde la pagina del carrito" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="6ac9737d7434f655eb61d97f9995c9898de5c60584408d3ea74c6507439b750b.png" title=" Then el pedido es generado y enviado correctamente" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="6ac9737d7434f655eb61d97f9995c9898de5c60584408d3ea74c6507439b750b.png" title=" And el usuario es redirigido a la pagina de confirmacion del pedido" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="4bfc6dd0a7721de695202bd7bb475fdea5653643d55ad5d959f812b5c67590ce.png" title=" 1: Realizar un pedido completo en el restaurante ({order_id=1, table_id=11, status**=READY, product_1=Hamburguesa, quantity_1=2, product_2=Papas fritas, quantity_2=1, product_3=Refresco, quantity_3=2, total_price=1130, confirmed_at=2026-03-10 12:30:00})" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="4bfc6dd0a7721de695202bd7bb475fdea5653643d55ad5d959f812b5c67590ce.png" title=" Given el usuario accede a la pagina de mesas disponibles (completed)" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="4bfc6dd0a7721de695202bd7bb475fdea5653643d55ad5d959f812b5c67590ce.png" title=" And selecciona una mesa con estado &quot;disponible&quot; (completed)" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="4bfc6dd0a7721de695202bd7bb475fdea5653643d55ad5d959f812b5c67590ce.png" title=" When el usuario es redirigido a la pagina del menu (completed)" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="4bfc6dd0a7721de695202bd7bb475fdea5653643d55ad5d959f812b5c67590ce.png" title=" And agrega productos al carrito seleccionando la cantidad deseada para cada uno (completed)" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="4bfc6dd0a7721de695202bd7bb475fdea5653643d55ad5d959f812b5c67590ce.png" title=" And revisa el carrito de compras y elimina los productos no deseados (completed)" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="4bfc6dd0a7721de695202bd7bb475fdea5653643d55ad5d959f812b5c67590ce.png" title=" And agrega notas adicionales a los productos que lo requieran (completed)" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="4bfc6dd0a7721de695202bd7bb475fdea5653643d55ad5d959f812b5c67590ce.png" title=" And confirma el pedido desde la pagina del carrito (completed)" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="4bfc6dd0a7721de695202bd7bb475fdea5653643d55ad5d959f812b5c67590ce.png" title=" Then el pedido es generado y enviado correctamente (completed)" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="4bfc6dd0a7721de695202bd7bb475fdea5653643d55ad5d959f812b5c67590ce.png" title=" And el usuario es redirigido a la pagina de confirmacion del pedido (completed)" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="4bfc6dd0a7721de695202bd7bb475fdea5653643d55ad5d959f812b5c67590ce.png" title=" And el usuario visualiza el mensaje de confirmacion junto con el ID del pedido: <span class='success-color'>SUCCESS</span>" width="0" />
+                </div>
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+<div id="beforefooter"></div>
+<div id="bottomfooter">
+    <span class="version">Serenity BDD version 5.3.2</span>
+</div>
+</body>
+</html>

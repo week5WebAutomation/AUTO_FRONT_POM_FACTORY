@@ -7,7 +7,7 @@ Feature: Flujo completo de pedido en restaurante
     When el usuario es redirigido a la pagina del menu
       And agrega productos al carrito seleccionando la cantidad deseada para cada uno
       And revisa el carrito de compras y elimina los productos no deseados
-      And añade notas adicionales a los productos que lo requieran
+      And agrega notas adicionales a los productos que lo requieran
       And confirma el pedido desde la pagina del carrito
     Then el pedido es generado y enviado correctamente
       And el usuario es redirigido a la pagina de confirmacion del pedido

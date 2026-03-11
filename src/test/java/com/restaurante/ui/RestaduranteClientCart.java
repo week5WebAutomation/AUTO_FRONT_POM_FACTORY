@@ -1,71 +1,57 @@
 package com.restaurante.ui;
 
 import net.serenitybdd.core.pages.PageObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import net.serenitybdd.core.pages.WebElementFacade;
+import net.serenitybdd.core.annotations.findby.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
 import java.util.List;
 
 public class RestaduranteClientCart extends PageObject {
 
-    @FindBy(xpath = "//div[contains(., 'Cantidad elegida en menú')]")
-    private List<WebElement> productosEnCarrito;
+    @FindBy(xpath = "//div[.//h3]//h3/ancestor::div[contains(@class,'flex')]")
+    private List<WebElementFacade> productosEnCarrito;
 
-    @FindBy(xpath = "//div[.//span[text()='Total']]/span[2]")
-    private WebElement totalCarrito;
+    @FindBy(xpath = "//button[contains(@aria-label,'Eliminar')]")
+    private List<WebElementFacade> botonesEliminar;
 
-    @FindBy(xpath = "//button[text()='Confirmar pedido']")
-    private WebElement btnConfirmarPedido;
+    @FindBy(xpath = "//input[@placeholder='Notas para este plato...']")
+    private List<WebElementFacade> camposNotas;
 
-    public void modificarProductoEnCarrito(int indiceProducto, int nuevaCantidad, String notaAdicional) {
-        WebElement producto = productosEnCarrito.get(indiceProducto);
-        WebElement campoCantidad = producto.findElement(By.cssSelector(".input-cantidad"));
-        WebElement campoNotas = producto.findElement(By.cssSelector(".input-notas"));
-
-        campoCantidad.clear();
-        campoCantidad.sendKeys(String.valueOf(nuevaCantidad));
-
-        campoNotas.clear();
-        campoNotas.sendKeys(notaAdicional);
-    }
+    @FindBy(xpath = "//button[contains(.,'Confirmar pedido')]")
+    private WebElementFacade btnConfirmarPedido;
 
     public void eliminarProductoDelCarrito(int indiceProducto) {
-        WebElement producto = productosEnCarrito.get(indiceProducto);
-        WebElement botonEliminar = producto.findElement(By.cssSelector(".btn-eliminar-producto"));
-        botonEliminar.click();
+        if (indiceProducto < botonesEliminar.size()) {
+            botonesEliminar.get(indiceProducto).waitUntilClickable().click();
+        }
     }
 
     public void eliminarProductosNoDeseados(List<Integer> indicesProductos) {
-        for (int indice : indicesProductos) {
-            eliminarProductoDelCarrito(indice);
+        for (int i = indicesProductos.size() - 1; i >= 0; i--) {
+            eliminarProductoDelCarrito(indicesProductos.get(i));
         }
     }
 
-    public String obtenerNombreProducto(int indiceProducto) {
-        WebElement producto = productosEnCarrito.get(indiceProducto);
-        return producto.findElement(By.cssSelector(".nombre-producto")).getText();
+    public void agregarNotaAProducto(int indiceProducto, String nota) {
+        if (indiceProducto < camposNotas.size()) {
+            camposNotas.get(indiceProducto).type(nota);
+        }
     }
 
-    public String obtenerPrecioProducto(int indiceProducto) {
-        WebElement producto = productosEnCarrito.get(indiceProducto);
-        return producto.findElement(By.cssSelector(".precio-producto")).getText();
-    }
-
-    public String obtenerTotalCarrito() {
-        return totalCarrito.getText();
+    public void agregarNotasAdicionales(List<Integer> indices, List<String> notas) {
+        for (int i = 0; i < indices.size() && i < notas.size(); i++) {
+            int indice = indices.get(i);
+            if (indice < camposNotas.size()) {
+                camposNotas.get(indice).type(notas.get(i));
+            }
+        }
     }
 
     public void confirmarPedido() {
-        btnConfirmarPedido.click();
-    }
-
-    public void agregarNotasAdicionales(List<Integer> indicesProductos, List<String> notas) {
-        for (int i = 0; i < indicesProductos.size(); i++) {
-            WebElement producto = productosEnCarrito.get(indicesProductos.get(i));
-            WebElement campoNotas = producto.findElement(By.cssSelector(".input-notas"));
-
-            campoNotas.clear();
-            campoNotas.sendKeys(notas.get(i));
-        }
+        btnConfirmarPedido.waitUntilClickable().click();
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.urlContains("confirm"));
     }
 }
