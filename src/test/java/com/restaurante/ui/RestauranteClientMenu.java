@@ -7,20 +7,29 @@ import java.util.List;
 
 public class RestauranteClientMenu extends PageObject {
 
-    @FindBy(css = ".btn-agregar-producto")
-    private List<WebElement> botonesAgregarProducto;
+    @FindBy(xpath = "//div[.//button[contains(text(),'Agregar')]]")
+    private List<WebElement> productos;
 
-    @FindBy(css = ".input-cantidad")
-    private List<WebElement> camposCantidad;
-
-    @FindBy(css = ".btn-ver-carrito")
+    @FindBy(xpath = "//button[.//span[contains(text(),'Comprar')]]")
     private WebElement btnVerCarrito;
 
-    public void agregarProductosAlCarrito() {
-        for (int i = 0; i < botonesAgregarProducto.size(); i++) {
-            camposCantidad.get(i).clear();
-            camposCantidad.get(i).sendKeys("1");
-            botonesAgregarProducto.get(i).click();
+    public void agregarProductoAlCarrito(int indiceProducto, int cantidad) {
+        WebElement producto = productos.get(indiceProducto);
+        WebElement campoCantidad = producto.findElement(By.cssSelector(".input-cantidad"));
+        WebElement botonAgregar = producto.findElement(By.cssSelector(".btn-agregar-producto"));
+
+        campoCantidad.clear();
+        campoCantidad.sendKeys(String.valueOf(cantidad));
+        botonAgregar.click();
+    }
+
+    public void agregarVariosProductosAlCarrito(List<Integer> indices, List<Integer> cantidades) {
+        for (int i = 0; i < indices.size(); i++) {
+            agregarProductoAlCarrito(indices.get(i), cantidades.get(i));
         }
+    }
+
+    public void verCarritoDeCompras() {
+        btnVerCarrito.click();
     }
 }
