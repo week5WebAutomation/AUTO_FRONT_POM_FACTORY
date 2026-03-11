@@ -13,12 +13,11 @@ public class RestauranteClientTable extends PageObject {
     private WebElement mesaSeleccionada;
 
     public void abrirPaginaMesas() {
-        openUrl(getDriver().getCurrentUrl());
+        open();
     }
 
     public void seleccionarMesaConEstado(String estado) {
-        String xpathDinamico = String.format("//button[.//span[contains(text(),'%s')]]", estado);
-        WebElement mesa = getDriver().findElementByXPath(xpathDinamico);
+        WebElement mesa = estado.equalsIgnoreCase("Vacia") ? mesaDisponible : mesaSeleccionada;
         mesa.click();
     }
 }
