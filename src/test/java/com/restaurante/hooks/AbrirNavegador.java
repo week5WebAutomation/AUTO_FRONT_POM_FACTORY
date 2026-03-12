@@ -13,6 +13,5 @@ public class AbrirNavegador {
     public void abrir() {
         WebDriver driver = new ChromeDriver();
         driver.get(url);
-        // Add any additional setup or teardown logic here if needed
     }
 }
